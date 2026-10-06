@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+
+  * {
+    @apply box-border;
+  }
+}
+
+@layer components {
+  .todo-layout {
+    @apply flex flex-col md:flex-row min-h-screen;
+  }
+
+  .todo-main {
+    @apply flex-1 overflow-y-auto bg-gray-50;
+  }
+}

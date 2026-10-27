@@ -1,0 +1,32 @@
+# trivy.yaml — Trivy vulnerability scanner configuration
+# Usage:
+#   Filesystem scan : trivy fs --config trivy.yaml .
+#   Container image : trivy image --config trivy.yaml <image>
+#
+# This file enforces the sec.no_critical_cves compliance requirement.
+# Any CRITICAL or HIGH severity CVE will cause a non-zero exit code so
+# CI pipelines can gate on the result.
+
+# Fail the scan when vulnerabilities are found
+exit-code: 1
+
+# Only report CRITICAL and HIGH findings to keep signal/noise ratio high
+severity:
+  - CRITICAL
+  - HIGH
+
+# Report both fixable and unfixed vulnerabilities so unfixed ones can be
+# reviewed and, if necessary, documented in .trivyignore with a justification
+# and a review date.
+ignore-unfixed: false
+
+# Enable vulnerability scanning (OS packages + language-level dependencies)
+scanners:
+  - vuln
+
+# Output as a human-readable table; override with --format json for CI ingest
+format: table
+
+# Ensure the advisory database is always refreshed before scanning
+db:
+  skip-update: false

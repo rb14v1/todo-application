@@ -11,7 +11,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PORT=8080
+# PORT is injected at runtime (e.g. docker run -e PORT=8080 ...)
+# Do not hardcode PORT here; set it in your deployment environment.
 
 RUN addgroup --system --gid 1001 nodejs \
  && adduser --system --uid 1001 nodeuser
